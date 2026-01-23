@@ -1,0 +1,45 @@
+name: Isolated nodes for unreviewed code
+on:
+  pull_request:
+  push:
+    branches: main
+
+jobs:
+  test-sandbox:
+    runs-on: ubuntu-latest
+
+    environment: Sandbox
+
+    permissions:
+      contents: read
+      pull-requests: none
+      packages: none
+      id-token: none
+
+    steps:
+      - uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98
+
+      - name: Run untrusted code
+        run: |
+          npm ci
+          npm test
+
+  deploy-production:
+    needs: test-sandbox
+
+    if: github.ref == 'refs/heads/main'
+
+    runs-on: ubuntu-latest
+
+    environment: Production
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98
+
+      - name: Authorized deploy
+        run: |
+          echo "Deploy to production"
