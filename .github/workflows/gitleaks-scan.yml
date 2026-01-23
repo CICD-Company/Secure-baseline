@@ -1,0 +1,16 @@
+name: Gitleaks scan pipeline
+
+on: push
+
+jobs:
+    secret-scan:
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98
+          with:
+            fetch-depth: 0
+
+        - name: Gitleaks scan
+          uses: gitleaks/gitleaks-action@b66ac75e4fa93d86d78fccd6e2f36d2c0698b2a2
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
