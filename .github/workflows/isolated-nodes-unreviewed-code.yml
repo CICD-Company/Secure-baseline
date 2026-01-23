@@ -18,6 +18,29 @@ jobs:
 
     steps:
       - uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238
+
+      - name: Install tools
+        run: |
+            npm install -g verdaccio npm-cli-login
+        
+      - name: Start Verdaccio
+        run: |
+            verdaccio &
+            sleep 5
+        
+      - name: Login to Verdaccio (non-interactive)
+        run: |
+            npm-cli-login -u test -p test -e test@test.com -r http://localhost:4873
+        
+      - name: Pre-fetch and cache dependencies
+        run: |
+            npm install react react-router
+
+      - name: Clean local modules
+        run: rm -rf node_modules
 
       - name: Run untrusted code
         run: |
