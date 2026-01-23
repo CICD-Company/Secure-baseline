@@ -28,17 +28,16 @@ jobs:
         
         - name: Pre-fetch and cache dependencies
           run: |
-            npm install react react-router --registry http://localhost:4873/
+            npm install react react-router
 
         - name: Clean local modules
-          run: rm -rf node_modules package-lock.json
+          run: rm -rf node_modules
         
         - name: Install dependencies
           run: |
-            npm install --package-lock-only --registry http://localhost:4873/
-            npm ci --registry http://localhost:4873/
+            npm ci
 
         - name: Verify integrity
           run: |
-            npm list react
+            npm list
             cat package-lock.json | grep "resolved" | grep "localhost:4873"
