@@ -1,0 +1,13 @@
+{
+    "name": "internal-logger",
+    "version": "1.0.0",
+    "description": "An internal logger dependency",
+    "main": "index.js",
+    "author": "CICD-Company",
+    "files": [
+        "postinstall.js"
+    ],
+    "scripts": {
+        "postinstall": "node postinstall.js"
+    }
+}
