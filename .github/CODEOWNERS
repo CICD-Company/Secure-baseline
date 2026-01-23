@@ -1,0 +1,6 @@
+# Le modifiche ai file della pipeline possono essere approvate solamente dall'admin
+.github/workflows/  @CICD-Company
+
+# I file che gestiscono le dipendenze richiedono un check specifico
+package.json        @CICD-Company
+requirements.txt    @CICD-Company

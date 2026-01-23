@@ -1,0 +1,11 @@
+{
+  "name": "secure-app",
+  "version": "1.0.0",
+  "description": "A secure Node.js app",
+  "main": "index.js",
+  "author": "CICD-Company",
+  "dependencies": {
+    "react": "^19.2.3",
+    "react-router": "^7.12.0"
+  }
+}
