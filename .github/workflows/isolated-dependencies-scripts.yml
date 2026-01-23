@@ -42,7 +42,7 @@ jobs:
       - name: Publish internal-logger
         working-directory: ./internal-logger
         run: |
-          npm publish
+          npm publish --registry http://localhost:4873
 
       - name: Clean local modules
         run: rm -rf node_modules
