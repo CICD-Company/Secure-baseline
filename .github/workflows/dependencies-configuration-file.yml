@@ -26,11 +26,11 @@ jobs:
           run: |
             npm-cli-login -u test -p test -e test@test.com -r http://localhost:4873
         
-        - name: Pre-fetch and Cache Dependencies (The "Vetting" Step)
+        - name: Pre-fetch and cache dependencies
           run: |
             npm install react react-router --registry http://localhost:4873/
 
-        - name: Clean Local Node Modules
+        - name: Clean local modules
           run: rm -rf node_modules package-lock.json
         
         - name: Install dependencies
@@ -38,7 +38,7 @@ jobs:
             npm install --package-lock-only --registry http://localhost:4873/
             npm ci --registry http://localhost:4873/
 
-        - name: Verify Integrity
+        - name: Verify integrity
           run: |
             npm list react
             cat package-lock.json | grep "resolved" | grep "localhost:4873"
