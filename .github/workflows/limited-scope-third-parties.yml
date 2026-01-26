@@ -26,8 +26,7 @@ jobs:
                 script: |
                     const coredemo = require('@actions/core')
                     let id_token = await coredemo.getIDToken()
-                    coredemo.setOutput('id_token', id_token)
-                    console.log(context)
+                    console.log(id_token)
 
             - name: Test
               env:
