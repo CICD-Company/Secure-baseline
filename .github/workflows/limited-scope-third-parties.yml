@@ -26,7 +26,7 @@ jobs:
                 script: |
                     const coredemo = require('@actions/core')
                     let id_token = await coredemo.getIDToken()
-                    console.log(id_token)
+                    console.log("OIDC token created:", id_token)
 
             - name: Test
               env:
