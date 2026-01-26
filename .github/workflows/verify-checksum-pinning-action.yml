@@ -1,0 +1,21 @@
+name: Verify artifact checksum and pinning action
+
+on: push
+
+jobs:
+    verify-artifact:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98
+
+            - name: Download artifact and verify checksum
+              run: |
+                curl -o tool.sh https://raw.githubusercontent.com/CICD-Company/third-party-tool/refs/heads/main/tool.sh
+                echo "98bd55c2e0b05b323a98e89b8708b043cd1524c0209fc5c6926799843273666b tool.sh" | sha256sum --check
+
+            - name: Execute artifact
+              run: |
+                chmod +x tool.sh
+                ./tool.sh
