@@ -1,0 +1,41 @@
+name: Least privilege and least access
+on:
+  pull_request:
+  push:
+    branches: main
+
+jobs:
+    debug:
+        runs-on: ubuntu-latest
+
+        environment: Test
+
+        permissions:
+            contents: read
+            pull-requests: none
+            packages: none
+            id-token: none
+        
+        steps:
+            - name: Debug
+              run: |
+                echo "Debugging the application"
+                echo "${{secrets.DEPLOY_TOKEN}}"
+            
+
+    test:
+        runs-on: ubuntu-latest
+
+        environment: Test
+
+        permissions:
+            contents: read
+            pull-requests: none
+            packages: none
+            id-token: write
+        
+        steps:
+            - name: Test
+              run: |
+                echo "Testing the application"
+                echo "${{secrets.DEPLOY_TOKEN}}"
