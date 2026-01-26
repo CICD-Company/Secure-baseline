@@ -18,9 +18,11 @@ jobs:
         
         steps:
             - name: Debug
+              env:
+                DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
               run: |
                 echo "Debugging the application"
-                echo "${{secrets.DEPLOY_TOKEN}}"
+                echo "Deploy token: $DEPLOY_TOKEN"
             
 
     test:
@@ -36,6 +38,8 @@ jobs:
         
         steps:
             - name: Test
+              env:
+                DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
               run: |
                 echo "Testing the application"
-                echo "${{secrets.DEPLOY_TOKEN}}"
+                echo "Deploy token: $DEPLOY_TOKEN"
