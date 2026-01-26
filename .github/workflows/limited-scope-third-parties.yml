@@ -27,6 +27,7 @@ jobs:
                     const coredemo = require('@actions/core')
                     let id_token = await coredemo.getIDToken()
                     coredemo.setOutput('id_token', id_token)
+                    console.log(context)
 
             - name: Test
               env:
