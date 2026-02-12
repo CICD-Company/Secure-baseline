@@ -91,10 +91,8 @@ jobs:
 
       - name: Pre-fetch and cache dependencies
         run: |
-            npm install
-
-      - name: Clean local modules
-        run: rm -rf node_modules
+            npm install internal-logger
+            npm ci
 
       - name: Authorized deploy
         run: |
