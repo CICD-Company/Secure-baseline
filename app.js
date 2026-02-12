@@ -1,9 +1,9 @@
-function greeting(name) {
+export function greeting(name) {
     return `Hello, ${name}!`;
 }
 
-export default { greeting };
+import { fileURLToPath } from 'node:url';
 
-if (require.main === module) {
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
     console.log(greeting("Baseline User"));
 }
