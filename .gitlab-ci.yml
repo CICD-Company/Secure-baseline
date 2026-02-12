@@ -1,0 +1,59 @@
+image: node:20
+
+stages:
+  - security_scan
+  - build_registry
+  - test_integrity
+  - deploy_production
+
+.verdaccio_setup: &verdaccio_setup
+  before_script:
+    - npm install -g verdaccio npm-cli-login
+    - verdaccio & sleep 5
+    - npm-cli-login -u test -p test -e test@test.com -r http://localhost:4873
+    - cd internal-logger && npm publish --registry http://localhost:4873 && cd ..
+
+
+gitleaks_scan:
+  stage: security_scan
+  image: 
+    name: zricethezav/gitleaks:latest
+    entrypoint: [""]
+  script:
+    - gitleaks detect --verbose --source .
+
+
+dependency_integrity_check:
+  stage: build_registry
+  <<: *verdaccio_setup
+  script:
+    - npm install internal-logger
+    - npm ci
+    - npm list
+    - grep "resolved" package-lock.json | grep "localhost:4873"
+    - if [ -f /tmp/postinstall-evidence.txt ]; then cat /tmp/postinstall-evidence.txt; fi
+
+test_sandbox:
+  stage: test_integrity
+  needs:
+    - project: 'JacoStu/external-tool'
+      job: build_tool
+      ref: main
+      artifacts: true
+  script:
+    - echo "Verifica integrità artefatto ricevuto da External tool..."
+    - EXPECTED_HASH="bd8c4e3bd18b997d15006ee91b6f98e75cab013b0bfa708d391ea154db9a36cd"
+    - echo "$EXPECTED_HASH tool.sh" | sha256sum --check
+    - chmod +x tool.sh
+    - ./tool.sh
+
+deploy_production:
+  stage: deploy_production
+  environment: Production
+  only:
+    - main
+  <<: *verdaccio_setup
+  script:
+    - npm install internal-logger
+    - npm ci
+    - echo "Deploy to production executed on isolated node"

@@ -96,5 +96,4 @@ jobs:
 
       - name: Authorized deploy
         run: |
-          npm start
           echo "Deploy to production"
