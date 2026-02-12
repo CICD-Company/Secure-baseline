@@ -1,5 +1,5 @@
 import { strictEqual } from 'node:assert';
-import { greeting } from './app';
+import { greeting } from './app.js';
 
 try {
     strictEqual(greeting("Test"), "Hello, Test!");
