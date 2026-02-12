@@ -37,7 +37,7 @@ jobs:
         
       - name: Pre-fetch and cache dependencies
         run: |
-            npm install react react-router
+            npm install
 
       - name: Clean local modules
         run: rm -rf node_modules
