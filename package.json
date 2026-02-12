@@ -16,7 +16,8 @@
     },
     "scripts": {
         "start": "node src/index.js",
-        "dev": "node src/index.js"
+        "dev": "node src/index.js",
+        "test": "node test.js"
     },
     "keywords": [
         "stocks",
