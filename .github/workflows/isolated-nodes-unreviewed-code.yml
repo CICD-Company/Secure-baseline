@@ -37,7 +37,7 @@ jobs:
         
       - name: Pre-fetch and cache dependencies
         run: |
-            npm install
+            npm install axios blessed blessed-contrib chalk
 
       - name: Clean local modules
         run: rm -rf node_modules
@@ -81,7 +81,7 @@ jobs:
         
       - name: Pre-fetch and cache dependencies
         run: |
-            npm install react react-router
+            npm install axios blessed blessed-contrib chalk
 
       - name: Clean local modules
         run: rm -rf node_modules
