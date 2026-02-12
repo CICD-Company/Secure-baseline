@@ -33,7 +33,7 @@ dependency_integrity_check:
     - grep "resolved" package-lock.json | grep "localhost:4873"
     - if [ -f /tmp/postinstall-evidence.txt ]; then cat /tmp/postinstall-evidence.txt; fi
 
-test_sandbox:
+test_intergrity:
   stage: test_integrity
   needs:
     - project: 'JacoStu/external-tool'
