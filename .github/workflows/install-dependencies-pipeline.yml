@@ -2,6 +2,8 @@ name: Install dependencies with package-lock file
 
 on: push
 
+permissions: read-all
+
 jobs:
     install-dependencies:
         runs-on: ubuntu-latest
