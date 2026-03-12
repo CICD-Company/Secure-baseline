@@ -2,6 +2,8 @@ name: Dependencies registry configuration file
 
 on: push
 
+permissions: read-all
+
 jobs:
   secure-install-dependencies:
     runs-on: ubuntu-latest
