@@ -2,6 +2,8 @@ name: Verify artifact checksum and pinning action
 
 on: push
 
+permissions: read-all
+
 jobs:
     verify-artifact:
         runs-on: ubuntu-latest
